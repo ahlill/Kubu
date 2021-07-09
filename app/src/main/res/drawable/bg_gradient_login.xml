@@ -7,8 +7,4 @@
         android:endColor="@color/trandingEnd"
         android:startColor="@color/trandingStart"/>
 
-    <corners
-        android:radius="10dp"/>
-
-
 </shape>

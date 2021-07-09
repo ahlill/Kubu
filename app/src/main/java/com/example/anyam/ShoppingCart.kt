@@ -3,11 +3,13 @@ package com.example.anyam
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anyam.Room.Cart
 import com.example.anyam.Room.CartDB
@@ -17,39 +19,41 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.anyam.Companion.Companion.rupiah
+import com.example.anyam.databinding.ActivityLoginBinding
+import com.example.anyam.databinding.ActivityShoppingCartBinding
+import com.google.firebase.platforminfo.DefaultUserAgentPublisher
 
 class ShoppingCart: AppCompatActivity(){
 
 
     private val db by lazy { CartDB(this) }
     lateinit var cartAdapter: ShoppingCartAdapter
+    private lateinit var binding: ActivityShoppingCartBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_cart)
+        binding = ActivityShoppingCartBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         setupRecyclerView()
+        loadData()
 
-        val btnBack: ImageView = findViewById(R.id.back)
-        btnBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
-
     }
 
     override fun onStart() {
         super.onStart()
-        CoroutineScope(Dispatchers.IO).launch{
+        CoroutineScope(Dispatchers.IO).launch {
             val cart = db.cartDao().getCart()
-            Log.d("ShoppingCart", "data $cart")
-            withContext((Dispatchers.Main)){
+            withContext((Dispatchers.Main)) {
                 cartAdapter.setData(cart)
+                if (!cart.isNullOrEmpty()) {
+                    binding.empty.visibility = View.INVISIBLE
+                }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadData()
     }
 
     private fun loadData(){
@@ -62,7 +66,6 @@ class ShoppingCart: AppCompatActivity(){
     }
 
     private fun setupRecyclerView () {
-
         cartAdapter = ShoppingCartAdapter(
             arrayListOf(),
             object : ShoppingCartAdapter.OnAdapterListener {

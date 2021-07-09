@@ -34,7 +34,16 @@ class GridItemAdapter(val listItem: ArrayList<DataModelItem>): RecyclerView.Adap
             .apply(RequestOptions().override(1000,1000))
             .into(holder.imgGambar)
 
-        holder.tvNama.text = item.nama
+//        Membatasi jumlah karakter nama barang
+        val nama: String
+        if(item.nama.length > 42){
+            nama = "${item.nama.subSequence(0, 42)}..."
+            holder.tvNama.text = nama
+        }else{
+            nama = item.nama
+            holder.tvNama.text = nama
+        }
+
         holder.tvHarga.text = rupiah.format(item.harga)
         holder.tvPenjualan.text = item.penjualan.toString()
 
