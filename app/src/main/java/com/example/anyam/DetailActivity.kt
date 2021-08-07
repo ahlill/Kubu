@@ -3,7 +3,6 @@ package com.example.anyam
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class DetailAdapter : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_NAMA = "nama"
@@ -76,12 +75,12 @@ class DetailAdapter : AppCompatActivity() {
             totalHarga = quantity * harga
             totalHargaRupiah = rupiah.format((quantity * harga))
 
-            val moveWithDataIntent = Intent(this, CartItem::class.java)
-            moveWithDataIntent.putExtra(CartItem.EXTRA_NAMA, nama)
-            moveWithDataIntent.putExtra(CartItem.EXTRA_HARGA, hargaRupiah)
-            moveWithDataIntent.putExtra(CartItem.EXTRA_SUBTOTAL, totalHarga)
-            moveWithDataIntent.putExtra(CartItem.EXTRA_GAMBAR_CART, gambar)
-            moveWithDataIntent.putExtra(CartItem.EXTRA_QUANTITY, quantity)
+            val moveWithDataIntent = Intent(this, CartItemActivity::class.java)
+            moveWithDataIntent.putExtra(CartItemActivity.EXTRA_NAMA, nama)
+            moveWithDataIntent.putExtra(CartItemActivity.EXTRA_HARGA, hargaRupiah)
+            moveWithDataIntent.putExtra(CartItemActivity.EXTRA_SUBTOTAL, totalHarga)
+            moveWithDataIntent.putExtra(CartItemActivity.EXTRA_GAMBAR_CART, gambar)
+            moveWithDataIntent.putExtra(CartItemActivity.EXTRA_QUANTITY, quantity)
             startActivity(moveWithDataIntent)
         }
 
@@ -103,7 +102,7 @@ class DetailAdapter : AppCompatActivity() {
         btnMasukKeranjang.setOnClickListener {
             totalHarga = quantity * harga
             totalHargaRupiah = rupiah.format((quantity * harga))
-            val moveWithDataIntent = Intent(this, ShoppingCart::class.java)
+            val moveWithDataIntent = Intent(this, ShoppingCartActivity::class.java)
 //            moveWithDataIntent.putExtra(CartItem.EXTRA_SUBTOTAL, totalHarga)
             startActivity(moveWithDataIntent)
             setupLstener()

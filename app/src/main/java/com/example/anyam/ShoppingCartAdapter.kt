@@ -1,6 +1,5 @@
 package com.example.anyam
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +33,8 @@ class ShoppingCartAdapter(private val carts: ArrayList<Cart>, private val listen
 
         holder.view.setOnClickListener{
             listener.onClick(cart)
-
         }
     }
-
 
     class CartViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
@@ -50,5 +47,4 @@ class ShoppingCartAdapter(private val carts: ArrayList<Cart>, private val listen
         fun onClick(note: Cart)
         fun onDelete(cart: Cart)
     }
-
 }

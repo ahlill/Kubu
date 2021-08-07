@@ -4,9 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.authfirebaseapp.LoginActivity
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -15,8 +14,8 @@ class SplashScreen : AppCompatActivity() {
         val splashTime: Long = 2500 // lama splashscreen berjalan
 
         Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent) // Pindah ke Home Activity setelah 3 detik
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }, splashTime)
     }

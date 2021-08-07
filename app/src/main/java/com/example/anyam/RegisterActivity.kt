@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.anyam.LoginActivity
 import com.example.anyam.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,8 +50,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(email: String, password: String) {
-        Toast.makeText(this, "$email, $password", Toast.LENGTH_SHORT).show()
-        Log.d("TAG", "$email, $password")
         mAuth?.createUserWithEmailAndPassword(email, password)
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -67,7 +66,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
 //             Jika gagal daftar
                     Log.w("TAG", " Create User With Email:Failure", task.exception)
-                    Toast.makeText(this, "Autentication failed1", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Gagal Mendaftar", Toast.LENGTH_SHORT).show()
                 }
             }
     }

@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.anyam">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,29 +12,56 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Anyam">
-        <activity android:name="com.example.authfirebaseapp.LoginActivity"></activity>
-        <activity android:name="com.example.authfirebaseapp.RegisterActivity" />
-        <activity android:name=".TaskSuccess" />
-        <activity android:name=".MetodePembayaran" />
-        <activity android:name=".TujuanPengiriman" />
-        <activity android:name=".Info" />
-        <activity android:name=".Bantuan" />
-        <activity android:name=".Contacts" />
-        <activity android:name=".BelanjaanTerbeli" />
-        <activity android:name=".ListMenu" />
-        <activity android:name=".ShoppingCart" />
-        <activity android:name=".Intro" />
-        <activity android:name=".CartItem" />
+        <activity android:name=".SplashScreenActivity"/>
         <activity
-            android:name=".DetailAdapter"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.authfirebaseapp.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TaskSuccess"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MetodePembayaran"
+            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".TujuanPengiriman"-->
+<!--            android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BantuanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ContactsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BelanjaanTerbeli"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ListMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShoppingCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CartItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddressActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".GridItemAdapter"
             tools:ignore="Instantiatable" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

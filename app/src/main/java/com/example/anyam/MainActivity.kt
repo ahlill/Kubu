@@ -1,12 +1,9 @@
 package com.example.anyam
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -27,13 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         val shoppingCart: ImageView = findViewById(R.id.shopping_cart)
         shoppingCart.setOnClickListener {
-            val intent = Intent(this, ShoppingCart::class.java)
+            val intent = Intent(this, ShoppingCartActivity::class.java)
             startActivity(intent)
         }
 
         val listMenu: ImageView = findViewById(R.id.list_menu)
         listMenu.setOnClickListener {
-            val intent = Intent(this, ListMenu::class.java)
+            val intent = Intent(this, ListMenuActivity::class.java)
             startActivity(intent)
         }
     }
@@ -51,13 +48,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSelectedItem(item: DataModelItem){
-        val moveWithDataIntent = Intent(this, DetailAdapter::class.java)
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_NAMA, item.nama)
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_HARGA, item.harga)
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_DESKRIPSI, item.deskripsi)
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_GAMBAR, item.gambarCarosel[0])
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_GAMBAR_CAROUSEL, item.gambarCarosel)
-        moveWithDataIntent.putExtra(DetailAdapter.EXTRA_PENJUALAN, item.penjualan)
+        val moveWithDataIntent = Intent(this, DetailActivity::class.java)
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_NAMA, item.nama)
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_HARGA, item.harga)
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_DESKRIPSI, item.deskripsi)
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_GAMBAR, item.gambarCarosel[0])
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_GAMBAR_CAROUSEL, item.gambarCarosel)
+        moveWithDataIntent.putExtra(DetailActivity.EXTRA_PENJUALAN, item.penjualan)
         startActivity(moveWithDataIntent)
     }
 }

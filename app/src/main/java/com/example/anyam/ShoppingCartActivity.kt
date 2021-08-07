@@ -2,14 +2,9 @@ package com.example.anyam
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anyam.Room.Cart
 import com.example.anyam.Room.CartDB
@@ -19,12 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.anyam.Companion.Companion.rupiah
-import com.example.anyam.databinding.ActivityLoginBinding
 import com.example.anyam.databinding.ActivityShoppingCartBinding
-import com.google.firebase.platforminfo.DefaultUserAgentPublisher
 
-class ShoppingCart: AppCompatActivity(){
-
+class ShoppingCartActivity : AppCompatActivity() {
 
     private val db by lazy { CartDB(this) }
     lateinit var cartAdapter: ShoppingCartAdapter
@@ -49,14 +41,14 @@ class ShoppingCart: AppCompatActivity(){
             val cart = db.cartDao().getCart()
             withContext((Dispatchers.Main)) {
                 cartAdapter.setData(cart)
-                if (!cart.isNullOrEmpty()) {
-                    binding.empty.visibility = View.INVISIBLE
+                if (cart.isNullOrEmpty()) {
+                    binding.empty.visibility = View.VISIBLE
                 }
             }
         }
     }
 
-    private fun loadData(){
+    private fun loadData() {
         CoroutineScope(Dispatchers.IO).launch {
             cartAdapter.setData(db.cartDao().getCart())
             withContext(Dispatchers.Main) {
@@ -65,26 +57,26 @@ class ShoppingCart: AppCompatActivity(){
         }
     }
 
-    private fun setupRecyclerView () {
+    private fun setupRecyclerView() {
         cartAdapter = ShoppingCartAdapter(
-            arrayListOf(),
-            object : ShoppingCartAdapter.OnAdapterListener {
-                override fun onClick(cart: Cart) {
-                    val hargaBarangRupiah = rupiah.format(cart.hargaBarang)
-                    val hargaSubTotal = cart.hargaBarang * cart.jumlahBarang
-                    startActivity(Intent(applicationContext, CartItem::class.java)
-                            .putExtra(CartItem.EXTRA_NAMA, cart.namaBarang)
-                            .putExtra(CartItem.EXTRA_HARGA, hargaBarangRupiah)
-                            .putExtra(CartItem.EXTRA_SUBTOTAL, hargaSubTotal)
-                            .putExtra(CartItem.EXTRA_GAMBAR_CART, cart.gambarBarang)
-                            .putExtra(CartItem.EXTRA_QUANTITY, cart.jumlahBarang))
-                }
+                arrayListOf(),
+                object : ShoppingCartAdapter.OnAdapterListener {
+                    override fun onClick(cart: Cart) {
+                        val hargaBarangRupiah = rupiah.format(cart.hargaBarang)
+                        val hargaSubTotal = cart.hargaBarang * cart.jumlahBarang
+                        startActivity(Intent(applicationContext, CartItemActivity::class.java)
+                                .putExtra(CartItemActivity.EXTRA_NAMA, cart.namaBarang)
+                                .putExtra(CartItemActivity.EXTRA_HARGA, hargaBarangRupiah)
+                                .putExtra(CartItemActivity.EXTRA_SUBTOTAL, hargaSubTotal)
+                                .putExtra(CartItemActivity.EXTRA_GAMBAR_CART, cart.gambarBarang)
+                                .putExtra(CartItemActivity.EXTRA_QUANTITY, cart.jumlahBarang))
+                    }
 
-                override fun onDelete(cart: Cart) {
-                    deleteAlert(cart)
-                }
+                    override fun onDelete(cart: Cart) {
+                        deleteAlert(cart)
+                    }
 
-            })
+                })
         list_cart.apply {
             layoutManager = LinearLayoutManager(applicationContext)
             adapter = cartAdapter
@@ -92,7 +84,7 @@ class ShoppingCart: AppCompatActivity(){
 
     }
 
-    private fun deleteAlert(cart: Cart){
+    private fun deleteAlert(cart: Cart) {
         val dialog = AlertDialog.Builder(this)
         dialog.apply {
             setTitle("Konfirmasi Hapus")

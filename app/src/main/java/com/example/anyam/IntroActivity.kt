@@ -9,7 +9,7 @@ import android.widget.Toast
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageClickListener
 
-class Intro : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
